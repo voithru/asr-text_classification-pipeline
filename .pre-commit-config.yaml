@@ -1,0 +1,63 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+  - repo: https://github.com/psf/black
+    rev: 21.4b2 # Replace by any tag/version: https://github.com/psf/black/tags
+    hooks:
+      - id: black
+        entry: black
+        language_version: python3 # Should be a command that runs python3.6+
+
+  - repo: https://github.com/pycqa/isort
+    rev: 5.8.0
+    hooks:
+      - id: isort
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.4.0
+    hooks:
+      - id: check-yaml
+        exclude: deploy
+      - id: end-of-file-fixer
+      - id: sort-simple-yaml
+      - id: requirements-txt-fixer
+      - id: check-json
+
+  - repo: local
+    hooks:
+      # HACK:
+      # pre-commit runs pylint from an isolated virtualenv.
+      # Many of pylint's checks perform dynamic analysis which will fail there.
+      # You may find configuring pylint as a local hook more useful.
+      # See https://stackoverflow.com/questions/61238318/pylint-and-pre-commit-hook-unable-to-import
+      # HACK 2:
+      # pre-commit hooks on Git client does not run with proper environment variables.
+      # See https://github.com/pre-commit/pre-commit/issues/1465#issuecomment-632603859
+      - id: pylint
+        name: pylint
+        entry: pylint temp --fail-under=10.0
+        language: system
+        pass_filenames: false
+        types: [python]
+        always_run: true
+        verbose: true
+
+      # HACK:
+      # impossible to use a remote pytest for pre-commit.
+      # because remote repository must contains `.pre-commit-hooks.yaml` for pre-commit
+      # but, currently(2021.04.29) pytest repository does not have `.pre-commit-hooks.yaml`
+      - id: pytest
+        name: pytest
+        entry: python3 -m pytest --cov=temp tests/
+        language: system
+        pass_filenames: false
+        always_run: true
+        verbose: true
+
+      - id: coverage
+        name: coverage
+        entry: coverage report --fail-under=100
+        language: system
+        pass_filenames: false
+        always_run: true
+        verbose: true

@@ -1,0 +1,39 @@
+[tool.black]
+line-length = 100
+target-version = ['py38']
+
+[tool.isort]
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+line_length = 100
+# See https://black.readthedocs.io/en/stable/compatible_configs.html#isort
+
+[tool.pylint.messages_control]
+disable = "C0330, C0326, C0114, C0115, C0116"
+# C0330: Wrong hanging indentation before block (add 4 spaces)
+# C0326: Bad whitespace
+# C0114: missing-module-docstring
+# C0115: missing-class-docstring
+# C0116: missing-function-docstring
+# See https://black.readthedocs.io/en/stable/compatible_configs.html#pylint
+
+[tool.pylint.format]
+max-line-length = "100"
+
+[tool.pylint.similarities]
+min-similarity-lines = "6"  # Default: 4
+ignore-imports = true  # Default: false
+
+[tool.pylint.design]
+# Maximum number of locals for function / method body
+max-locals=25  # Default: 15
+
+[tool.pylint.master]
+# To avoid E0401: Unable to import (import-error) for relative imports
+init-hook='import sys; sys.path.append(".")'
+
+[tool.pylint.typecheck]
+ignored-modules="cv2"
