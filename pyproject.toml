@@ -12,7 +12,7 @@ line_length = 100
 # See https://black.readthedocs.io/en/stable/compatible_configs.html#isort
 
 [tool.pylint.messages_control]
-disable = "C0330, C0326, C0114, C0115, C0116"
+disable = "C0330, C0326, C0114, C0115, C0116, R0903"
 # C0330: Wrong hanging indentation before block (add 4 spaces)
 # C0326: Bad whitespace
 # C0114: missing-module-docstring

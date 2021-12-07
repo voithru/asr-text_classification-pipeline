@@ -35,7 +35,7 @@ repos:
       # See https://github.com/pre-commit/pre-commit/issues/1465#issuecomment-632603859
       - id: pylint
         name: pylint
-        entry: pylint temp --fail-under=10.0
+        entry: pylint stt --fail-under=10.0
         language: system
         pass_filenames: false
         types: [python]
@@ -48,7 +48,7 @@ repos:
       # but, currently(2021.04.29) pytest repository does not have `.pre-commit-hooks.yaml`
       - id: pytest
         name: pytest
-        entry: python3 -m pytest --cov=temp tests/
+        entry: python3 -m pytest --cov=stt tests/
         language: system
         pass_filenames: false
         always_run: true

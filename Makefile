@@ -22,7 +22,7 @@ install-requirements:
 
 # Test
 test:
-	python -m pytest --cov=temp tests/
+	python -m pytest --cov=stt tests/
 	coverage report --fail-under=100
 
 # Check
