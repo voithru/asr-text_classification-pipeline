@@ -36,4 +36,4 @@ max-locals=25  # Default: 15
 init-hook='import sys; sys.path.append(".")'
 
 [tool.pylint.typecheck]
-ignored-modules="cv2"
+ignored-modules=["cv2", "torch"]
