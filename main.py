@@ -1,4 +1,5 @@
 import logging
+from argparse import ArgumentParser
 from pathlib import Path
 
 from stt.parameters import ASRParameters, MediaParameters
@@ -13,25 +14,34 @@ logging.basicConfig(
 )
 
 
-def main():
-    wave_dir = Path("tests/data")
-    stt_output_path = Path("./stt.json")
-    output_path = Path("./predict.json")
+def main(args):
+    wav_dir = args.wav_dir
+    stt_output_path = args.stt_output_path
+    output_path = args.output_path
 
     asr_param = ASRParameters(
-        vocab_path=Path("tests/data/vocab.json"), checkpoint_path=Path("tests/data/checkpoint-700")
+        vocab_path=Path("tests/data/vocab.json"), checkpoint_path=args.wav2vec_checkpoint
     )
     media_param = MediaParameters(sample_rate=16000)
 
     selected_processor = Wav2vecProcessor(media_param, asr_param)
-    selected_processor.process(wave_dir, stt_output_path)
+    selected_processor.process(wav_dir, stt_output_path)
     predict_text_class(
         stt_output_path,
         output_path,
-        checkpoint_dir=Path("tests/data/checkpoint-540"),
+        checkpoint_dir=args.electra_checkpoint,
         config_path=Path("text_classification/koelectra-base-v3.json"),
     )
 
 
 if __name__ == "__main__":
-    main()
+    parser = ArgumentParser()
+    parser.add_argument("--wav_dir", type=Path)
+    parser.add_argument("--stt_output_path", type=Path)
+    parser.add_argument("--output_path", type=Path)
+
+    parser.add_argument("--wav2vec_checkpoint", type=Path)
+    parser.add_argument("--electra_checkpoint", type=Path)
+
+    args = parser.parse_args()
+    main(args)
