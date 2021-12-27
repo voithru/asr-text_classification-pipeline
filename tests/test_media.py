@@ -1,8 +1,8 @@
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from stt.data_models.parameters import MediaParameters
 from stt.media.media_processor import MediaProcessor
+from stt.parameters import MediaParameters
 
 
 def test_media_processor():

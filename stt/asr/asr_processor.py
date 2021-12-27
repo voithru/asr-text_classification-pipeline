@@ -10,7 +10,7 @@ from transformers import (
     Wav2Vec2Processor,
 )
 
-from stt.data_models.parameters import ASRParameters
+from ..parameters import ASRParameters
 
 
 class ASRProcessor:

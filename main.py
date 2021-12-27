@@ -1,7 +1,7 @@
 import logging
 from pathlib import Path
 
-from stt.data_models.parameters import ASRParameters, MediaParameters
+from stt.parameters import ASRParameters, MediaParameters
 from stt.processor import Wav2vecProcessor
 from text_classification.predict import predict_text_class
 

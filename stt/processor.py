@@ -3,8 +3,8 @@ from pathlib import Path
 from typing import List
 
 from .asr.asr_processor import ASRProcessor
-from .data_models.parameters import ASRParameters, MediaParameters
 from .media.media_processor import MediaProcessor
+from .parameters import ASRParameters, MediaParameters
 from .post.post_processor import PostProcessor
 
 logger = logging.getLogger(__name__)

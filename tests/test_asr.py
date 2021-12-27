@@ -2,7 +2,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from stt.asr.asr_processor import ASRProcessor
-from stt.data_models.parameters import ASRParameters
+from stt.parameters import ASRParameters
 
 
 def test_media_processor():

@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from stt.data_models.parameters import ASRParameters, MediaParameters
+from stt.parameters import ASRParameters, MediaParameters
 from stt.processor import Wav2vecProcessor
 
 

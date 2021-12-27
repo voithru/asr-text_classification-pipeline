@@ -1,7 +1,7 @@
 import logging
 from pathlib import Path
 
-from ..data_models.parameters import MediaParameters
+from ..parameters import MediaParameters
 from .core.downsample_and_convert_to_mono import downsample_and_convert_to_mono
 
 logger = logging.getLogger(__name__)
