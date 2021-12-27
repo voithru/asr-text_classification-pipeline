@@ -1,0 +1,9 @@
+{
+    "do_lower_case": false,
+    "max_seq_len": 128,
+    "no_cuda": false,
+    "model_type": "koelectra-base-v3",
+    "tokenizer_dir": "text_classification/text_classification_tokenizer",
+    "seed": 42,
+    "eval_batch_size": 128
+}
