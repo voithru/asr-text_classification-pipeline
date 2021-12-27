@@ -10,11 +10,13 @@ from transformers import (
     Wav2Vec2Processor,
 )
 
+from stt.data_models.parameters import ASRParameters
+
 
 class ASRProcessor:
-    def __init__(self, vocab_path: Path, checkpoint_path: Path):
+    def __init__(self, asr_params: ASRParameters):
         self.tokenizer = Wav2Vec2CTCTokenizer(
-            vocab_path,
+            asr_params.vocab_path,
             unk_token="[UNK]",
             pad_token="[PAD]",
             word_delimiter_token="|",
@@ -26,7 +28,7 @@ class ASRProcessor:
             do_normalize=True,
             return_attention_mask=True,
         )
-        self.model = Wav2Vec2ForCTC.from_pretrained(checkpoint_path)
+        self.model = Wav2Vec2ForCTC.from_pretrained(asr_params.checkpoint_path)
         self.processor = Wav2Vec2Processor(
             feature_extractor=self.feature_extractor, tokenizer=self.tokenizer
         )
