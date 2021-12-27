@@ -1,6 +1,6 @@
-# ASR and Text_classification Pipeline
+# ASR and Text classification Pipeline
 
-Text classification with Speech Recognition pipeline
+Text classification with Speech Recognition in unified pipeline
 
 - We used Wav2Vec for speech recognition. If you want to know how to finetune wav2vec, please see [here](https://colab.research.google.com/github/patrickvonplaten/notebooks/blob/master/Fine_tuning_Wav2Vec2_for_English_ASR.ipynb)(for korean, see [here](https://github.com/voithru/wav2vec2_finetune))
 
