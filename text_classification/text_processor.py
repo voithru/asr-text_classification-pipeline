@@ -1,12 +1,11 @@
 import copy
 import json
-from typing import List
 
 import torch
 from torch.utils.data import TensorDataset
 
 
-class InputExample(object):
+class InputExample:
     """
     A single training/tests example for simple sequence classification.
     """
@@ -21,16 +20,14 @@ class InputExample(object):
         return str(self.to_json_string())
 
     def to_dict(self):
-        """Serializes this instance to a Python dictionary."""
         output = copy.deepcopy(self.__dict__)
         return output
 
     def to_json_string(self):
-        """Serializes this instance to a JSON string."""
         return json.dumps(self.to_dict(), indent=2, sort_keys=True) + "\n"
 
 
-class InputFeatures(object):
+class InputFeatures:
     """A single set of features of data."""
 
     def __init__(self, input_ids, attention_mask, token_type_ids, label):
@@ -74,24 +71,20 @@ def seq_cls_convert_examples_to_features(examples, tokenizer, max_length):
     return features
 
 
-class DatasetProcessor(object):
-    """Processor for the AIGrandChallenge2021 data set"""
-
-    def __init__(self, label: List[str]):
-        self.label = label
+class TextProcessor:
+    def __init__(self):
+        pass
 
     def get_labels(self):
-        return self.label
+        return ["020121", "02051", "020811", "020819", "000001"]
 
     @classmethod
     def _read_file(cls, input_file):
-        """Reads a tab separated value file."""
         with open(input_file, "r", encoding="utf-8") as f:
             data = json.load(f)
         return data
 
     def _create_examples(self, data):
-        """Creates examples for the training and dev sets."""
         examples = []
         file_name_list = []
         for (i, file_name) in enumerate(data):
@@ -104,12 +97,12 @@ class DatasetProcessor(object):
         return self._create_examples(self._read_file(input_path))
 
 
-def load_examples(input_path, tokenizer):
-    processor = DatasetProcessor([])
+def load_examples(input_path, tokenizer, max_seq_len):
+    processor = TextProcessor()
 
     examples, file_name_list = processor.get_examples(input_path)
 
-    features = seq_cls_convert_examples_to_features(examples, tokenizer, max_length=256)
+    features = seq_cls_convert_examples_to_features(examples, tokenizer, max_length=max_seq_len)
 
     # Convert to Tensors and build dataset
     all_input_ids = torch.tensor([f.input_ids for f in features], dtype=torch.long)
