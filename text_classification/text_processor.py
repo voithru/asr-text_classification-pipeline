@@ -97,12 +97,14 @@ class TextProcessor:
         return self._create_examples(self._read_file(input_path))
 
 
-def load_examples(input_path, tokenizer, max_seq_len):
+def load_examples(input_path, tokenizer, args):
     processor = TextProcessor()
 
     examples, file_name_list = processor.get_examples(input_path)
 
-    features = seq_cls_convert_examples_to_features(examples, tokenizer, max_length=max_seq_len)
+    features = seq_cls_convert_examples_to_features(
+        examples, tokenizer, max_length=args.max_seq_len
+    )
 
     # Convert to Tensors and build dataset
     all_input_ids = torch.tensor([f.input_ids for f in features], dtype=torch.long)
