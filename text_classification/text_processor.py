@@ -62,9 +62,6 @@ def seq_cls_convert_examples_to_features(examples, tokenizer, max_length):
     features = []
     for i in range(len(examples)):
         inputs = {k: batch_encoding[k][i] for k in batch_encoding}
-        if "token_type_ids" not in inputs:
-            inputs["token_type_ids"] = [0] * len(inputs["input_ids"])  # For xlm-roberta
-
         feature = InputFeatures(**inputs, label=None)
         features.append(feature)
 
@@ -74,9 +71,6 @@ def seq_cls_convert_examples_to_features(examples, tokenizer, max_length):
 class TextProcessor:
     def __init__(self):
         pass
-
-    def get_labels(self):
-        return ["020121", "02051", "020811", "020819", "000001"]
 
     @classmethod
     def _read_file(cls, input_file):

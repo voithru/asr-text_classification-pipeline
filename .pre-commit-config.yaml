@@ -48,7 +48,7 @@ repos:
       # but, currently(2021.04.29) pytest repository does not have `.pre-commit-hooks.yaml`
       - id: pytest
         name: pytest
-        entry: python3 -m pytest --cov=stt tests/
+        entry: python3 -m pytest --cov=stt --cov=text_classification --cov-report term-missing tests/
         language: system
         pass_filenames: false
         always_run: true

@@ -13,7 +13,6 @@ logger = logging.getLogger(__name__)
 class GrandChallengeTextClassifier:
     def __init__(self, args):
         self.args = args
-        self.set_seed()
 
         self.tokenizer = ElectraTokenizer.from_pretrained(
             self.args.tokenizer_dir, do_lower_case=self.args.do_lower_case
@@ -48,19 +47,8 @@ class GrandChallengeTextClassifier:
                 outputs = self.model(**inputs)
                 logits = outputs[1]
 
-            if preds is None:
-                preds = logits.detach().cpu().numpy()
-
-            else:
-                preds = np.append(preds, logits.detach().cpu().numpy(), axis=0)
+            preds = logits.detach().cpu().numpy()
 
         preds = np.argmax(preds, axis=1)
 
         return preds
-
-    def set_seed(self):
-        random.seed(self.args.seed)
-        np.random.seed(self.args.seed)
-        torch.manual_seed(self.args.seed)
-        if not self.args.no_cuda and torch.cuda.is_available():
-            torch.cuda.manual_seed_all(self.args.seed)
