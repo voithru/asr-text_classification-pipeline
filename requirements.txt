@@ -3,4 +3,4 @@ fastprogress
 librosa
 soundfile
 torch==1.6.0
-transformers
+transformers==3.3.1
